@@ -19,7 +19,9 @@ def process_grid(lines) -> Dict:
         grid.append(list(map(int, l)))
     return grid
 
+
 NEIGHBOR_DELTAS = [-1, 1, -1j, 1j]
+
 
 def get_neighbors(grid, pt):
     max_x = len(grid)
@@ -30,7 +32,8 @@ def get_neighbors(grid, pt):
         if option.real >= max_x or option.imag >= max_y:
             continue
         ret.append(option)
-    return ret 
+    return ret
+
 
 def run_part_a(lines):
     grid = process_grid(lines)
@@ -46,13 +49,14 @@ def run_part_a(lines):
     cost_so_far[start] = 0
 
     while frontier:
-        cost, cur  = heapq.heappop(frontier)
+        cost, cur = heapq.heappop(frontier)
 
         if cur == goal:
             return cost
 
         for nb in get_neighbors(grid, cur):
-            new_cost = cost + grid[int(cur.real)][int(cur.imag)] # or cost + xxx
+            # or cost + xxx
+            new_cost = cost + grid[int(cur.real)][int(cur.imag)]
             if (nb not in cost_so_far) or (new_cost < cost_so_far[nb]):
                 cost_so_far[nb] = new_cost
                 came_from[nb] = cur
